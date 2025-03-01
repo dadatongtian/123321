@@ -1,0 +1,16 @@
+FROM python:3.9
+
+WORKDIR /app
+
+COPY ./backend /app
+
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN pip install -r requirements -i https://mirrors.aliyun.com/pypi/simple/
+
+RUN chmod +x /app/start.sh
+
+EXPOSE 8101
+
+ENTRYPOINT ["/app/start.sh"]
+
+#docker run --restart=always -d --name zerorunner -p 8092:8092 zerorunner
